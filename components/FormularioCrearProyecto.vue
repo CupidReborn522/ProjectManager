@@ -20,9 +20,8 @@
     <div>
       <label>Tipo:</label>
       <select v-model="proyectoActual.tipo" required>
-        <option value="Consuelo">Consuelo</option>
-        <option value="Negado">Negado</option>
-        <option value="Cancelier">Cancelier</option>
+        <option value="Cotización">Cotización</option>
+        <option value="Negocio">Negocio</option>
       </select>
     </div>
     <button type="submit">Guardar</button>
