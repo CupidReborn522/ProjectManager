@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-
+import { useProyectosStore } from '@/stores/proyectosStore';
 const store = useProyectosStore();
 const { proyectos } = store;
 
