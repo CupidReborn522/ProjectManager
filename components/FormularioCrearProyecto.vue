@@ -33,8 +33,23 @@ import { useProyectosStore } from '@/stores/proyectosStore';
 import { ref } from 'vue';
 
 const store = useProyectosStore();
-const { proyectoActual } = store;
+const { proyectoActual,ejemplo } = store;
 const errorNombre = ref(false); // Estado para mostrar el error
+const modoEdicion = ref(false); // Estado para manejar el modo de edición
+const indiceEdicion = ref(null); // Índice del proyecto que se está editando
+
+// Función para cargar los datos del proyecto en el formulario
+function cargarProyectoParaEditar(index) {
+  store.cargarProyectoParaEditar(proyectos[index]);
+  modoEdicion.value = true; // Activa el modo de edición
+  indiceEdicion.value = index; // Guarda el índice del proyecto que se está editando
+}
+// Función para cancelar la edición
+function cancelarEdicion() {
+  store.limpiarFormulario(); // Vacía el formulario
+  modoEdicion.value = false; // Desactiva el modo de edición
+  indiceEdicion.value = null; // Reinicia el índice de edición
+}
 
 // Función para guardar el proyecto
 function guardarProyecto() {
@@ -52,6 +67,7 @@ function guardarProyecto() {
 
   if (proyectoActual.nombre && proyectoActual.ejecutivo && proyectoActual.clientes && proyectoActual.contacto && proyectoActual.tipo) {
     store.agregarProyecto({ ...proyectoActual });
+    store.$reset()
   } else {
     alert('Por favor, complete todos los campos.');
   }
@@ -68,7 +84,8 @@ label {
   margin-bottom: 0.5rem;
 }
 
-input, select {
+input,
+select {
   width: 100%;
   padding: 0.5rem;
 }
