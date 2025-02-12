@@ -28,6 +28,7 @@
 
 <script setup>
 import { useProyectosStore } from '@/stores/proyectosStore';
+
 const store = useProyectosStore();
 const { proyectos } = store;
 
@@ -47,7 +48,7 @@ function eliminarProyecto(index) {
 <style scoped>
 
 table {
-  width: 100%;
+  width: 50%;
   border-collapse: collapse;
 }
 

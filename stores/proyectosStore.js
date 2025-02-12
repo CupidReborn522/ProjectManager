@@ -1,7 +1,6 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
-export const useProyectosStore = defineStore({
-  id: 'proyectos',
+export const useProyectosStore = defineStore('proyectos', {
   state: () => ({
     proyectos: [], // Lista de proyectos
     proyectoActual: { // Objeto para el formulario
@@ -57,4 +56,4 @@ export const useProyectosStore = defineStore({
       };
     },
   },
-})
+});
