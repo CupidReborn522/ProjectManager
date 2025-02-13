@@ -45,22 +45,28 @@ const { $reset, guardarProyecto,
 </script>
 
 <style scoped>
-form{
 
+form{
+  /* position: absolute; */
+  top: 0;
+  z-index: 99;
   width: 100%;
+  max-width: 280px;
   margin-left: 10px;
   margin-right: 10px;
   border-radius: 7px;
   border: 1px solid black;
   box-sizing: border-box;
   padding: 30px;
+  background-color: white;
 
 }
 
 @media screen and ( min-width: 500px ) {
   form{
-    width:30%;
-    min-width: 200px;
+    width:35%;
+    min-width: 300px;
+    right:10%
   }
 }
 
@@ -75,13 +81,14 @@ form div {
 
 label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 input,
 select {
   width: 100%;
   padding: 5px;
+  border-radius: 5px;
 }
 
 .error {

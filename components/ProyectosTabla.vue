@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div class="container">
+    <select name="" id="">
+      <option value="">Tabla</option>
+      <option value="">Acordion</option>
+    </select>
     <table>
       <thead>
       <tr>
@@ -18,8 +22,8 @@
         <td>{{ proyecto.clientes }}</td>
         <td>{{ proyecto.contacto }}</td>
         <td>{{ proyecto.tipo }}</td>
-        <td>
-          <button class="editar" @click="editarProyecto(index)">Editar</button>
+        <td class="options">
+          <button class="editar" @click="editarProyecto(index)">✎</button>
           <button class="eliminar" @click="eliminarProyecto(index)">×</button>
         </td>
       </tr>
@@ -40,6 +44,13 @@ const {editarProyecto,eliminarProyecto} = store
 </script>
 
 <style scoped>
+div.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 
 div{
   overflow-x: auto;
@@ -59,6 +70,7 @@ div{
 table {
   border-collapse: collapse;
   font-size: 16px;
+  margin-top:24px;
 }
 
 th,
@@ -69,23 +81,40 @@ td {
 }
 td {
   
+  
+  text-wrap-mode: wrap;
+  text-align: justify;
+  max-width: 100px;
+}
+
+td.options{
+  flex-wrap: nowrap;
+  gap:10px;
   text-wrap: nowrap;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: rgba(255, 220, 64, 0.9);
 }
 
 button {
   margin-right: 5px;
-  border: none;
+  border: 1px solid black;
   cursor:pointer
 }
 button.editar{
   background-color: dodgerblue;
+  color: white;
+  font-weight: bolder;
+  font-size: x-large;
+  width: 35px;
+  height: 35px;
 }
 button.eliminar{
   background-color: salmon;
+  font-size: x-large;
+  width: 35px;
+  height: 35px;
 }
 
 

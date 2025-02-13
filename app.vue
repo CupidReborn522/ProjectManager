@@ -11,7 +11,7 @@
 
 <style>
 #app {
-  font-family: monospace;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   text-align: center;
   margin-top: 60px;
   display: flex;
@@ -20,6 +20,7 @@
   justify-content: center;
   align-items: center;
   gap:10px;
+  position: relative;
 }
 
 @media screen and ( min-width: 150px) {
