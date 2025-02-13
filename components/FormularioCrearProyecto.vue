@@ -1,4 +1,5 @@
 <template>
+  
   <form @submit.prevent="guardarProyecto">
     <div>
       <label>Nombre:</label>
@@ -25,58 +26,51 @@
       </select>
     </div>
     <button type="submit">Guardar</button>
+    <p class="edicion" v-if="modoEditar">
+    modo edicion
+    <button v-if="modoEditar" @click="cancelarEditar">Cancelar</button>
+  </p>
+    
   </form>
 </template>
 
 <script setup>
 import { useProyectosStore } from '@/stores/proyectosStore';
-import { ref } from 'vue';
-
 const store = useProyectosStore();
-const { proyectoActual,ejemplo } = store;
-const errorNombre = ref(false); // Estado para mostrar el error
-const modoEdicion = ref(false); // Estado para manejar el modo de edición
-const indiceEdicion = ref(null); // Índice del proyecto que se está editando
 
-// Función para cargar los datos del proyecto en el formulario
-function cargarProyectoParaEditar(index) {
-  store.cargarProyectoParaEditar(proyectos[index]);
-  modoEdicion.value = true; // Activa el modo de edición
-  indiceEdicion.value = index; // Guarda el índice del proyecto que se está editando
-}
-// Función para cancelar la edición
-function cancelarEdicion() {
-  store.limpiarFormulario(); // Vacía el formulario
-  modoEdicion.value = false; // Desactiva el modo de edición
-  indiceEdicion.value = null; // Reinicia el índice de edición
-}
+const {proyectoActual,modoEditar,errorNombre } = storeToRefs(store);
+const { $reset, guardarProyecto,
+  editarProyecto, eliminarProyecto,cancelarEditar} = store
 
-// Función para guardar el proyecto
-function guardarProyecto() {
-  errorNombre.value = false; // Reinicia el estado del error
-
-  // Verifica si el nombre ya existe
-  const nombreExiste = store.proyectos.some(
-    (p) => p.nombre.toLowerCase() === proyectoActual.nombre.toLowerCase()
-  );
-
-  if (nombreExiste) {
-    errorNombre.value = true; // Muestra el error
-    return; // Detiene la ejecución si el nombre ya existe
-  }
-
-  if (proyectoActual.nombre && proyectoActual.ejecutivo && proyectoActual.clientes && proyectoActual.contacto && proyectoActual.tipo) {
-    store.agregarProyecto({ ...proyectoActual });
-    store.$reset()
-  } else {
-    alert('Por favor, complete todos los campos.');
-  }
-}
 </script>
 
 <style scoped>
+form{
+
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 7px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 30px;
+
+}
+
+@media screen and ( min-width: 500px ) {
+  form{
+    width:30%;
+    min-width: 200px;
+  }
+}
+
 form div {
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
 }
 
 label {
@@ -87,7 +81,7 @@ label {
 input,
 select {
   width: 100%;
-  padding: 0.5rem;
+  padding: 5px;
 }
 
 .error {
@@ -95,4 +89,13 @@ select {
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
+
+p.edicion{
+  position: absolute;
+  z-index: 99;
+  top:0;
+  right: 10px;
+}
+
+
 </style>

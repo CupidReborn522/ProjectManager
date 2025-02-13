@@ -1,6 +1,7 @@
 <template>
-  <table>
-    <thead>
+  <div>
+    <table>
+      <thead>
       <tr>
         <th>Nombre</th>
         <th>Ejecutivo</th>
@@ -18,44 +19,57 @@
         <td>{{ proyecto.contacto }}</td>
         <td>{{ proyecto.tipo }}</td>
         <td>
-          <button @click="editarProyecto(index)">Editar</button>
-          <button @click="eliminarProyecto(index)">Eliminar</button>
+          <button class="editar" @click="editarProyecto(index)">Editar</button>
+          <button class="eliminar" @click="eliminarProyecto(index)">×</button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
 </template>
 
 <script setup>
 import { useProyectosStore } from '@/stores/proyectosStore';
 
 const store = useProyectosStore();
-const { proyectos } = store;
+const { proyectos } = storeToRefs(store)
+const {editarProyecto,eliminarProyecto} = store
 
-function editarProyecto(index) {
-  // Carga el proyecto en el formulario para editar
-  store.proyectoActual = { ...proyectos[index] };
-}
 
-function eliminarProyecto(index) {
-  if (confirm('¿Estás seguro de eliminar este proyecto?')) {
-    store.eliminarProyecto(index);
-  }
-}
 
 </script>
 
 <style scoped>
 
+div{
+  overflow-x: auto;
+  max-width: 80vw;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+@media screen and (min-width:500px) {
+div{
+  max-width: 55%;
+}
+  
+}
+
 table {
-  width: 50%;
   border-collapse: collapse;
+  font-size: 16px;
 }
 
 th,
 td {
   border: 1px solid #ddd;
   padding: 8px;
+  
+}
+td {
+  
+  text-wrap: nowrap;
 }
 
 th {
@@ -64,5 +78,16 @@ th {
 
 button {
   margin-right: 5px;
+  border: none;
+  cursor:pointer
 }
+button.editar{
+  background-color: dodgerblue;
+}
+button.eliminar{
+  background-color: salmon;
+}
+
+
+
 </style>
