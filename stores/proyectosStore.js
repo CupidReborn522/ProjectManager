@@ -73,7 +73,7 @@ export const useProyectosStore = defineStore('proyectos', () => {
   function actualizarProyecto(index) {
     // Verifica si el nombre ya existe (excepto para el proyecto actual)
     const nombreExiste = proyectos.value.some(
-      (p, i) => i !== index && p.nombre.toLowerCase() === proyectoActualizado.nombre.toLowerCase()
+      (p, i) => i !== index && p.nombre.toLowerCase() === proyectoActual.value.nombre.toLowerCase()
     );
 
     if (nombreExiste) {

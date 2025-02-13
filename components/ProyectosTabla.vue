@@ -47,8 +47,9 @@ const {editarProyecto,eliminarProyecto} = store
 div.container{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: flex-start;
+  margin-top: 40px;
 }
 
 
@@ -57,21 +58,29 @@ div{
   max-width: 80vw;
   display: flex;
   justify-content: left;
-  align-items: center;
+  align-items: flex-start;
 }
 
-@media screen and (min-width:500px) {
+@media screen and (min-width:900px) {
 div{
   max-width: 55%;
 }
   
 }
 
+@media screen and ( min-width:1050px ) {
+div{
+  max-width: 60%;
+}
+
+}
+
 table {
   border-collapse: collapse;
   font-size: 16px;
-  margin-top:24px;
+  margin-top:14px;
   border: 2px solid black ;
+  box-shadow: 2px 7px 13px 0px rgba(0,0,0,0.2);
 }
 
 th,
@@ -85,8 +94,16 @@ td {
   
   
   text-wrap-mode: wrap;
-  text-align: justify;
+  text-align: left;
   max-width: 100px;
+}
+
+@media screen and ( min-width:1050px ) {
+
+  td{
+    max-width: 200px;
+  }
+  
 }
 
 td.options{
@@ -96,7 +113,7 @@ td.options{
 }
 
 th {
-  background-color: rgba(255, 220, 64, 0.9);
+  background-color: rgb(45, 207, 94);
 }
 
 button {
@@ -104,6 +121,12 @@ button {
   border: 1px solid black;
   cursor:pointer
 }
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
 button.editar{
   background-color: dodgerblue;
   color: white;

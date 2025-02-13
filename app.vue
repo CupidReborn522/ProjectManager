@@ -21,6 +21,7 @@
   align-items: center;
   gap:10px;
   position: relative;
+  padding-bottom: 55px;
 }
 
 @media screen and ( min-width: 150px) {
