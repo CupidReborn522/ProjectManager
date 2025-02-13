@@ -1,30 +1,33 @@
 <template>
 
   <form @submit.prevent="guardarProyecto">
-    
     <FormularioItemsInput label="Nombre:" placeholder="Ingrese nombre del proyecto" v-model="proyectoActual.nombre"
       type="text">
       <p v-if="errorNombre" class="error">El nombre del proyecto ya existe.</p>
     </FormularioItemsInput>
-    <FormularioItemsInput label="Ejecutivo:" placeholder="Buscar al usuario" v-model="proyectoActual.ejecutivo"
-      type="text">
-    </FormularioItemsInput>
     
-    <FormularioItemsInput label="Cliente:" placeholder="Buscar al usuario" v-model="proyectoActual.cliente"
-      type="text">
-    </FormularioItemsInput>
+    <FormularioItemsSelectWithSearch label="Ejecutivo:"
+    v-model="proyectoActual.ejecutivo"
+    :required="true"
+    >
 
-    <FormularioItemsInput label="Contacto:" placeholder="Buscar al usuario" v-model="proyectoActual.contacto"
-      type="text">
-    </FormularioItemsInput>
+    </FormularioItemsSelectWithSearch>
 
-    <FormularioItemsSelect
-    label="Tipo:"
-    v-model="proyectoActual.tipo"
-    :options="misOpciones"
+    
+    <FormularioItemsSelectWithSearch label="Cliente:"
+    v-model="proyectoActual.cliente"
+    >
 
+    </FormularioItemsSelectWithSearch>
 
-    ></FormularioItemsSelect>
+    
+    <FormularioItemsSelectWithSearch label="Contacto:"
+    v-model="proyectoActual.contacto"
+    >
+
+    </FormularioItemsSelectWithSearch>
+
+    <FormularioItemsSelect label="Tipo:" v-model="proyectoActual.tipo" :options="misOpciones"></FormularioItemsSelect>
     <button type="submit">Guardar</button>
     <p class="edicion" v-if="modoEditar">
       modo edicion
@@ -42,7 +45,7 @@ const { proyectoActual, modoEditar, errorNombre } = storeToRefs(store);
 const { $reset, guardarProyecto,
   editarProyecto, eliminarProyecto, cancelarEditar } = store
 
-  const misOpciones = ref([
+const misOpciones = ref([
   { value: 'Negocio', label: 'Negocio' },
   { value: 'Cotización', label: 'Cotización' },
 ]);
