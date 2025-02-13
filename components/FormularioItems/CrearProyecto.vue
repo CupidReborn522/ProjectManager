@@ -1,34 +1,30 @@
 <template>
 
   <form @submit.prevent="guardarProyecto">
-
+    
     <FormularioItemsInput label="Nombre:" placeholder="Ingrese nombre del proyecto" v-model="proyectoActual.nombre"
       type="text">
       <p v-if="errorNombre" class="error">El nombre del proyecto ya existe.</p>
     </FormularioItemsInput>
-    <!-- <div>
-      <label>Nombre:</label>
-      <input v-model="proyectoActual.nombre" placeholder="Ingrese nombre del proyecto" required />
-    </div> -->
-    <div>
-      <label>Ejecutivo:</label>
-      <input v-model="proyectoActual.ejecutivo" placeholder="Buscar al usuario..." required />
-    </div>
-    <div>
-      <label>Clientes:</label>
-      <input v-model="proyectoActual.clientes" placeholder="Buscar al usuario..." required />
-    </div>
-    <div>
-      <label>Contacto:</label>
-      <input v-model="proyectoActual.contacto" placeholder="Buscar al usuario..." required />
-    </div>
-    <div>
-      <label>Tipo:</label>
-      <select v-model="proyectoActual.tipo" required>
-        <option value="Cotización">Cotización</option>
-        <option value="Negocio">Negocio</option>
-      </select>
-    </div>
+    <FormularioItemsInput label="Ejecutivo:" placeholder="Buscar al usuario" v-model="proyectoActual.ejecutivo"
+      type="text">
+    </FormularioItemsInput>
+    
+    <FormularioItemsInput label="Cliente:" placeholder="Buscar al usuario" v-model="proyectoActual.cliente"
+      type="text">
+    </FormularioItemsInput>
+
+    <FormularioItemsInput label="Contacto:" placeholder="Buscar al usuario" v-model="proyectoActual.contacto"
+      type="text">
+    </FormularioItemsInput>
+
+    <FormularioItemsSelect
+    label="Tipo:"
+    v-model="proyectoActual.tipo"
+    :options="misOpciones"
+
+
+    ></FormularioItemsSelect>
     <button type="submit">Guardar</button>
     <p class="edicion" v-if="modoEditar">
       modo edicion
@@ -46,14 +42,21 @@ const { proyectoActual, modoEditar, errorNombre } = storeToRefs(store);
 const { $reset, guardarProyecto,
   editarProyecto, eliminarProyecto, cancelarEditar } = store
 
+  const misOpciones = ref([
+  { value: 'Negocio', label: 'Negocio' },
+  { value: 'Cotización', label: 'Cotización' },
+]);
+
 </script>
 
 <style scoped>
 form {
   position: relative;
   z-index: 99;
+  /* right:10%;
+  top:0; */
   width: 100%;
-  max-width: 280px;
+  max-width: 300px;
   margin-left: 10px;
   margin-right: 10px;
   border-radius: 7px;
@@ -67,8 +70,7 @@ form {
 
 @media screen and (min-width: 500px) {
   form {
-    width: 35%;
-    min-width: 300px;
+    min-width: 380px;
 
   }
 }
@@ -77,7 +79,6 @@ form {
   form {
     width: 45%;
     min-width: 380px;
-    right: 10%
   }
 }
 

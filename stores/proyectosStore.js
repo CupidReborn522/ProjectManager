@@ -5,7 +5,8 @@ export const useProyectosStore = defineStore('proyectos', () => {
   const proyectos = ref([{
     nombre: 'Ejemplo de nombre',
     ejecutivo: 'Ejemplo de ejecutivo',
-    clientes: 'Ejemplo de cliente',
+    ejecutivo_src:'none',
+    cliente: 'Ejemplo de cliente',
     contacto: 'Ejemplo de contacto',
     tipo: 'Cotización',
   }])
@@ -22,7 +23,8 @@ export const useProyectosStore = defineStore('proyectos', () => {
     { // Objeto para el formulario
       nombre: '',
       ejecutivo: '',
-      clientes: '',
+      ejecutivo_src:'',
+      cliente: '',
       contacto: '',
       tipo: '',
     }
@@ -31,7 +33,8 @@ export const useProyectosStore = defineStore('proyectos', () => {
     proyectoActual.value = { // Objeto para el formulario
       nombre: '',
       ejecutivo: '',
-      clientes: '',
+      ejecutivo_src:'',
+      cliente: '',
       contacto: '',
       tipo: '',
     }
