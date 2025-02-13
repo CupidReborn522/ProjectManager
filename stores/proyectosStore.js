@@ -5,11 +5,43 @@ export const useProyectosStore = defineStore('proyectos', () => {
   const proyectos = ref([{
     nombre: 'Ejemplo de nombre',
     ejecutivo: 'Ejemplo de ejecutivo',
-    ejecutivo_src:'none',
+    ejecutivo_src: 'none',
     cliente: 'Ejemplo de cliente',
     contacto: 'Ejemplo de contacto',
     tipo: 'Cotización',
   }])
+
+  const usuarios = ref([
+    {
+      'nombre': 'Mariana',
+      'image': ''
+    }
+  ])
+
+  const carga = ref(false)
+
+  const errorCargaUsuarios = ref(null)
+
+  async function obtenerUsuarios() {
+    try {
+      const response = await $fetch('https://apidev.unabase.cc/app/users/findUsers/ByNames?name=miguel');
+      const procesado = response.map(el => (
+        {
+          'nombre': el.data.legalName,
+          'image': el.imgUrl
+        }
+      ))
+      console.log('procesado',procesado)
+      usuarios.value = procesado; // Asigna la respuesta al estado `users`
+    } catch (error) {
+      errorCargaUsuarios.value = 'Error al cargar los usuarios';
+      console.error(error);
+    } finally {
+      errorCargaUsuarios.value = false
+    }
+  }
+obtenerUsuarios()
+  
 
   const modoEditar = ref(false)
 
@@ -23,7 +55,7 @@ export const useProyectosStore = defineStore('proyectos', () => {
     { // Objeto para el formulario
       nombre: '',
       ejecutivo: '',
-      ejecutivo_src:'',
+      ejecutivo_src: '',
       cliente: '',
       contacto: '',
       tipo: '',
@@ -33,7 +65,7 @@ export const useProyectosStore = defineStore('proyectos', () => {
     proyectoActual.value = { // Objeto para el formulario
       nombre: '',
       ejecutivo: '',
-      ejecutivo_src:'',
+      ejecutivo_src: '',
       cliente: '',
       contacto: '',
       tipo: '',
@@ -58,7 +90,7 @@ export const useProyectosStore = defineStore('proyectos', () => {
       return;
     }
 
-    proyectos.value.push({...proyectoActual.value});
+    proyectos.value.push({ ...proyectoActual.value });
     $reset()
   }
   function editarProyecto(index) {
@@ -96,7 +128,7 @@ export const useProyectosStore = defineStore('proyectos', () => {
       alert('No puedes borrar mientras se edita un proyecto')
       return;
     }
-    if(confirm('¿seguro que quiere borrar el proyecto?')){
+    if (confirm('¿seguro que quiere borrar el proyecto?')) {
       proyectos.value.splice(index, 1);
     }
   }
@@ -104,6 +136,7 @@ export const useProyectosStore = defineStore('proyectos', () => {
   return {
     proyectos, proyectoActual, modoEditar, errorNombre,
     $reset, guardarProyecto,
-    editarProyecto, cancelarEditar, eliminarProyecto
+    editarProyecto, cancelarEditar, eliminarProyecto, usuarios,
+    obtenerUsuarios,errorCargaUsuarios,carga
   }
 })
