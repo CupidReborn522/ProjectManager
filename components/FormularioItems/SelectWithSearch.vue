@@ -29,15 +29,20 @@ const props = defineProps({
   required:{
     type:Boolean,
     default:false,
-  }
+  },
+  image_src:{
+    type: String,
+    default: '',
+  },
+  
 });
 
 
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue','update:image_src']);
 
 const store = useProyectosStore();
-const { usuarios} = storeToRefs(store)
+const { usuarios,proyectoActual} = storeToRefs(store)
 const { obtenerUsuarios } = store
 const searchQuery = ref(props.modelValue); // Query de búsqueda
 
@@ -60,6 +65,7 @@ const filteredUsers = computed(() => {
 function selectUser(user) {
   searchQuery.value = user.nombre; // Mostrar el nombre del usuario seleccionado
   emit('update:modelValue', user.nombre);
+  emit('update:image_src',user.image);
   // Aquí puedes emitir un evento o realizar otras acciones
   console.log('Usuario seleccionado:', user);
 }

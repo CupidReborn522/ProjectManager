@@ -7,7 +7,8 @@
     </FormularioItemsInput>
     
     <FormularioItemsSelectWithSearch label="Ejecutivo:"
-    v-model="proyectoActual.ejecutivo"
+    v-model:modelValue="proyectoActual.ejecutivo"
+    v-model:image_src="proyectoActual.ejecutivo_src"
     :required="true"
     >
 
