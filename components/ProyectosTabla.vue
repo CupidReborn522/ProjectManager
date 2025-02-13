@@ -71,11 +71,13 @@ table {
   border-collapse: collapse;
   font-size: 16px;
   margin-top:24px;
+  border: 2px solid black ;
 }
 
 th,
 td {
-  border: 1px solid #ddd;
+  /* border: 1px solid black; */
+  border-top:1px solid black;
   padding: 8px;
   
 }
