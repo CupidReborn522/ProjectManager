@@ -10,6 +10,8 @@
       :value="modelValue"
       @input="updateValue"
       :placeholder="placeholder"
+      required
+      maxlength="20"
     />
     <slot></slot>
   </div>
@@ -36,7 +38,6 @@ const inputId = computed(() => `input-${Math.random().toString(36).substring(2, 
 function updateValue(event) {
   emit('update:modelValue', event.target.value);
 }
-
 </script>
 
 <style scoped>
