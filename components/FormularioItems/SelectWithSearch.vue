@@ -95,7 +95,7 @@ watch(
 <style scoped>
 .select-with-search {
   position: relative;
-  width: 300px;
+  width: 100%;
 }
 
 .search-input {

@@ -38,6 +38,7 @@ function selectOption(value) {
 /* Estilos para el componente select visible */
 .select-visible {
   margin-bottom: 1rem; 
+  justify-self: center;
 }
 
 label {
@@ -52,21 +53,20 @@ label {
   overflow-y: auto; 
   width: 100%; 
   display: flex; 
-  justify-content:left;
+  justify-content:center;
   gap:5px;
   
 }
 
 .select-option {
+ 
   padding: 10px 25px; /* Espaciado interno de cada opción */
+  border-radius: 4px; 
   cursor: pointer; /* Cursor de 'mano' al pasar por encima */
   border-bottom: 1px solid #eee; /* Línea divisoria entre opciones */
   transition: background-color 0.2s ease-in-out; /* Transición suave para el hover */
 }
 
-.select-option:last-child {
-  border-bottom: none; /* Elimina el borde inferior de la última opción */
-}
 
 .select-option.selected {
   background-color: rgb(45, 207, 94); 

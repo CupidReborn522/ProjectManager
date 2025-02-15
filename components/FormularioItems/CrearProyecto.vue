@@ -29,10 +29,10 @@
     </FormularioItemsSelectWithSearch>
 
     <FormularioItemsSelect label="Tipo:" v-model="proyectoActual.tipo" :options="misOpciones"></FormularioItemsSelect>
-    <button type="submit">Guardar</button>
+    <button type="submit" class="submit">Guardar</button>
     <p class="edicion" v-if="modoEditar">
       modo edicion
-      <button v-if="modoEditar" @click="cancelarEditar">Cancelar</button>
+      <button v-if="modoEditar" @click="cancelarEditar" class="cancelEdit">Cancelar</button>
     </p>
 
   </form>
@@ -99,5 +99,17 @@ p.edicion {
   top: -1%;
   right: 10px;
   background-color: white;
+}
+button.submit{
+   border-radius: 4px;
+   padding: 15px 30px;
+   background-color: rgb(45, 207, 94);
+
+}
+
+button.cancelEdit{
+  background-color: rgb(45, 207, 94);
+  border-radius: 4px;
+   padding: 5px 10px;
 }
 </style>

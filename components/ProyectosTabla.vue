@@ -94,6 +94,7 @@ td {
   /* border: 1px solid black; */
   border-top: 1px solid black;
   padding: 8px;
+  max-width: 100px;
 
 }
 
@@ -103,6 +104,7 @@ td {
   text-wrap-mode: wrap;
   text-align: left;
   padding: 20px;
+  overflow: auto;
 }
 
 @media screen and (min-width:1050px) {

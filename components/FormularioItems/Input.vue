@@ -11,6 +11,7 @@
       @input="updateValue"
       :placeholder="placeholder"
       required
+      maxlength="20"
     />
     <slot></slot>
   </div>
