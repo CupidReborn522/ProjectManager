@@ -24,12 +24,15 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['close'])
+
 // Estado para controlar la visibilidad de la notificación
 const visible = ref(true);
 
 // Función para cerrar la notificación
 function closeNotification() {
   visible.value = false;
+  emit('close')
 }
 
 // Cerrar la notificación automáticamente después de la duración especificada
@@ -55,12 +58,13 @@ onUnmounted(() => {
   right: 20px;
   padding: 15px;
   border-radius: 5px;
-  color: white;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 300px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 }
 
 .notification.info {

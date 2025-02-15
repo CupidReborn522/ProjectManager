@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia';
+import { useNotificacionesStore } from './notificacionesStore';
 
 
 export const useProyectosStore = defineStore('proyectos', () => {
+  const notificaciones = useNotificacionesStore()
+
   const proyectos = ref([{
     nombre: 'Ejemplo de nombre',
     ejecutivo: 'Ejemplo de ejecutivo',
@@ -11,12 +14,7 @@ export const useProyectosStore = defineStore('proyectos', () => {
     tipo: 'Cotización',
   }])
 
-  const usuarios = ref([
-    {
-      'nombre': 'Mariana',
-      'image': ''
-    }
-  ])
+  const usuarios = ref([])
 
   const carga = ref(false)
 
@@ -31,7 +29,7 @@ export const useProyectosStore = defineStore('proyectos', () => {
           'image': el.imgUrl
         }
       ))
-      console.log('procesado',procesado)
+      console.log('procesado', procesado)
       usuarios.value = procesado; // Asigna la respuesta al estado `users`
     } catch (error) {
       errorCargaUsuarios.value = 'Error al cargar los usuarios';
@@ -40,8 +38,8 @@ export const useProyectosStore = defineStore('proyectos', () => {
       errorCargaUsuarios.value = false
     }
   }
-obtenerUsuarios()
-  
+  obtenerUsuarios()
+
 
   const modoEditar = ref(false)
 
@@ -91,6 +89,7 @@ obtenerUsuarios()
     }
 
     proyectos.value.push({ ...proyectoActual.value });
+    notificaciones.crearNotificacion('Proyecto creado', 'success')
     $reset()
   }
   function editarProyecto(index) {
@@ -118,6 +117,7 @@ obtenerUsuarios()
 
     proyectos.value[index] = { ...proyectoActual.value };
     modoEditar.value = false
+    notificaciones.crearNotificacion('Proyecto actualizado', 'info')
     $reset()
 
   }
@@ -130,6 +130,7 @@ obtenerUsuarios()
     }
     if (confirm('¿seguro que quiere borrar el proyecto?')) {
       proyectos.value.splice(index, 1);
+      notificaciones.crearNotificacion('Proyecto borrado', 'error')
     }
   }
 
@@ -137,6 +138,6 @@ obtenerUsuarios()
     proyectos, proyectoActual, modoEditar, errorNombre,
     $reset, guardarProyecto,
     editarProyecto, cancelarEditar, eliminarProyecto, usuarios,
-    obtenerUsuarios,errorCargaUsuarios,carga
+    obtenerUsuarios, errorCargaUsuarios, carga
   }
 })

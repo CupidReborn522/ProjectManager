@@ -3,7 +3,7 @@
     <!-- Input para buscar usuarios -->
      <label>
       {{ label }}
-       <input :required="required" v-model="searchQuery" @input="filterUsers" placeholder="Buscar usuarios..." class="search-input" />
+       <input readonly :required="required" v-model="searchQuery" @input="filterUsers" placeholder="Seleccionar usuario" class="search-input" />
       </label>
 
     <!-- Lista de usuarios filtrados -->
@@ -135,4 +135,6 @@ label{
 label input{
   margin-top: 5px;
 }
+
+
 </style>

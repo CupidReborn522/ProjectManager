@@ -128,8 +128,8 @@ td.ejecutivo {
 
 td.ejecutivo div{
   background-color: rgb(45, 207, 94);
-  height: 50px;
-  width:50px;
+  height: 70px;
+  width:70px;
   max-width: none;
   border:1px solid black;
   border-radius: 50%;
@@ -137,6 +137,7 @@ td.ejecutivo div{
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 img {

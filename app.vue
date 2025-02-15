@@ -1,19 +1,25 @@
 <script setup lang="ts">
+import { useNotificacionesStore } from './stores/notificacionesStore';
+
+const notificaciones =  useNotificacionesStore()
+const {cerrarNotificacion} = notificaciones
+const {tipoNotificacion,mensajeNotificacion,mostrarNotificacion} = storeToRefs(notificaciones)
+
 </script>
 
 <template>
   <div class="main">
     <Navbar></Navbar>
+    <Notification
+     v-if="mostrarNotificacion"
+     :message="mensajeNotificacion"
+     :type="tipoNotificacion"
+     @close="cerrarNotificacion"
+   /> 
     <div id="app">
       <!-- <button @click="mostrarNotificacion">Mostrar notificación</button> -->
 
       <!-- Notificación -->
-    <!-- <Notification
-      v-if="mostrar"
-      :message="mensaje"
-      :type="tipo"
-      @close="mostrar = false"
-    /> -->
     <ProyectosTabla />
     <FormularioItemsCrearProyecto />
   </div>

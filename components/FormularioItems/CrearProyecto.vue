@@ -56,9 +56,6 @@ const misOpciones = ref([
 <style scoped>
 form {
   position: relative;
-  z-index: 99;
-  /* right:10%;
-  top:0; */
   width: 100%;
   max-width: 300px;
   margin-left: 10px;
@@ -98,7 +95,7 @@ form div {
 
 p.edicion {
   position: absolute;
-  z-index: 99;
+  z-index: 10;
   top: -1%;
   right: 10px;
   background-color: white;
