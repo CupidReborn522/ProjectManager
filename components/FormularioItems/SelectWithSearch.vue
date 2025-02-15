@@ -1,13 +1,13 @@
 <template>
-  <div class="select-with-search">
+  <div class="select-with-search" @focusout="handleBlur">
     <!-- Input para buscar usuarios -->
      <label>
       {{ label }}
-       <input readonly :required="required" v-model="searchQuery" @input="filterUsers" placeholder="Seleccionar usuario" class="search-input" />
+       <input readonly :required="required" v-model="searchQuery" @input="filterUsers" @focusin="handleFocus" placeholder="Seleccionar usuario" class="search-input" />
       </label>
 
     <!-- Lista de usuarios filtrados -->
-    <ul v-if="usuarios.length" class="users-list">
+    <ul v-if="usuarios.length && isOpen" class="users-list">
       <li v-for="(user,index) in usuarios" :key="index" @click="selectUser(user)" class="user-item">
         <img :src="user.image" :alt="user.nombre" class="user-image" />
         <span>{{ user.nombre }}</span>
@@ -15,7 +15,7 @@
     </ul>
 
     <!-- Mensaje si no hay resultados -->
-    <p v-else class="no-results">No se encontraron usuarios.</p>
+    <p v-if="usuarios.length == 0" class="no-results">Cargando usuarios...</p>
     
   </div>
 </template>
@@ -36,6 +36,8 @@ const props = defineProps({
   },
   
 });
+
+const isOpen = ref(false)
 
 
 
@@ -61,11 +63,23 @@ const filteredUsers = computed(() => {
   // );
 });
 
+function handleFocus(){
+  isOpen.value = true
+}
+
+function handleBlur() {
+  setTimeout(()=>{
+    isOpen.value = false
+
+  },200)
+  }
+
 // Función para seleccionar un usuario
 function selectUser(user) {
   searchQuery.value = user.nombre; // Mostrar el nombre del usuario seleccionado
   emit('update:modelValue', user.nombre);
   emit('update:image_src',user.image);
+  isOpen.value = false
   // Aquí puedes emitir un evento o realizar otras acciones
   console.log('Usuario seleccionado:', user);
 }
